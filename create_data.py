@@ -57,6 +57,6 @@ if __name__ == '__main__':
         parameters = np.array(parameters)
         data = np.array(data)
         np.save('data/can96_parameters_'+str(c)[:4], parameters)
-        np.save('data/can96_data_' + str(c), data)
+        np.save('data/can96_data_' + str(c)[:4], data)
 
 

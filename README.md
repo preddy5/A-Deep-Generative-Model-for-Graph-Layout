@@ -1,36 +1,19 @@
-# tsNET
+# Implementing DGL paper
 
-Graph Layouts by t-SNE
+Some code has been taken from tsnet paper
 
-```
-usage: tsnet.py [-h] [--star] [--perplexity PERPLEXITY]
-                [--learning_rate LEARNING_RATE] [--output OUTPUT]
-                input_graph
-
-Read a graph, and produce a layout with tsNET(*).
-
-positional arguments:
-  input_graph
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --star                Use the tsNET* scheme. (Requires PivotMDS layout in
-                        ./pivotmds_layouts/ as initialization.) Note: Use
-                        higher learning rates for larger graphs, for faster
-                        convergence.
-  --perplexity PERPLEXITY, -p PERPLEXITY
-                        Perplexity parameter.
-  --learning_rate LEARNING_RATE, -l LEARNING_RATE
-                        Learning rate (hyper)parameter for optimization.
-  --output OUTPUT, -o OUTPUT
-                        Save layout to the specified file.
-```
+This is not an official implementation  contact the authors for more info.
 
 # Dependencies
 
-* `python3`
-* [`numpy`](http://www.numpy.org/)
-* [`matplotlib`](https://matplotlib.org/)
-* [`graph-tool`](https://graph-tool.skewed.de/)
-* [`theano`](http://deeplearning.net/software/theano/)
-* [`scikit-learn`](http://scikit-learn.org/stable/)
+Look at env.txt file to setup the environment
+
+```
+conda create -n dgl python=3.6
+conda activate dgl
+
+conda install pytorch=1.0.1 torchvision cudatoolkit=10.0 -c pytorch -y
+conda install -c floriangeigl -c vgauthier -c msarahan -c bioconda -c ostrokach -c salford_systems -c ptorrestr -c pkgw -c kalefranz graph-tool
+conda install -c conda-forge libiconv
+conda install -c conda-forge gdk-pixbuf
+```
