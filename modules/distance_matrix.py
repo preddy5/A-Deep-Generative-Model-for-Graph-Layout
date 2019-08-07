@@ -3,6 +3,15 @@ import numpy as np
 import itertools
 
 
+def d2_distance_matrix(dpos):
+    dt = dpos.T
+    dt_rep = dt[None,:,:].repeat(96, 0).shape
+    dt_rep_T = dt_rep.transpose([1,0,2])
+    sub_dt = dt_rep_T - dt_rep
+    sq_sub_dt = sub_dt**2
+    dist_matrix = np.sqrt(sq_sub_dt[:,:,0] + sq_sub_dt[:,:,1])
+    return dist_matrix
+
 def get_modified_adjacency_matrix(g, k):
     # Get regular adjacency matrix
     adj = gt.adjacency(g)
