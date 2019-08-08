@@ -1,13 +1,10 @@
 
 import numpy as np
-import matplotlib.pyplot as plt
 import os
-import time
+import graph_tool
 import graph_tool.all as gt
-import modules.layout_io as layout_io
 import modules.graph_io as graph_io
 import modules.distance_matrix as distance_matrix
-from modules.distance_matrix import d2_distance_matrix
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
@@ -41,7 +38,7 @@ if __name__ == '__main__':
     mu_range = [0.0, 0.5]
     mu_p_range = [0.8, 1.2]
 
-
+    np.save('data/'+graph_name+'_adj', graph_tool.spectral.adjacency(g))
     for c in np.arange(C_range[0], C_range[1], ((C_range[1]-C_range[0])/num_per)):
         parameters = []
         data = []
@@ -56,7 +53,7 @@ if __name__ == '__main__':
         print('Done')
         parameters = np.array(parameters)
         data = np.array(data)
-        np.save('data/can96_parameters_'+str(c)[:4], parameters)
-        np.save('data/can96_data_' + str(c)[:4], data)
+        np.save('data/'+graph_name+'_parameters_'+str(c)[:4], parameters)
+        np.save('data/'+graph_name+'_data_' + str(c)[:4], data)
 
 

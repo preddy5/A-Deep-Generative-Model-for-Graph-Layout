@@ -5,7 +5,7 @@ import itertools
 
 def d2_distance_matrix(dpos):
     dt = dpos.T
-    dt_rep = dt[None,:,:].repeat(96, 0).shape
+    dt_rep = dt[None,:,:].repeat(96, 0)
     dt_rep_T = dt_rep.transpose([1,0,2])
     sub_dt = dt_rep_T - dt_rep
     sq_sub_dt = sub_dt**2
