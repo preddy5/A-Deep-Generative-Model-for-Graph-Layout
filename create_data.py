@@ -32,13 +32,14 @@ if __name__ == '__main__':
     X = distance_matrix.get_distance_matrix(g, 'spdm', verbose=False)
     print('Done.')
 
-    num_per = 12
+    num_per = 3
     C_range = [0.1, 0.3]
     p_range = [1.5, 2.5]
     mu_range = [0.0, 0.5]
     mu_p_range = [0.8, 1.2]
 
-    np.save('data/'+graph_name+'_adj', graph_tool.spectral.adjacency(g))
+    np.save('data/'+graph_name+'_adj', graph_tool.spectral.adjacency(g).todense())
+    counter =0
     for c in np.arange(C_range[0], C_range[1], ((C_range[1]-C_range[0])/num_per)):
         parameters = []
         data = []
@@ -49,7 +50,11 @@ if __name__ == '__main__':
                     pos = gt.sfdp_layout(g, C=c, p=p, mu=mu, mu_p=mu_p)
                     dpos = pos.get_2d_array([0,1])
                     parameters.append([c, p, mu, mu_p])
-                    data.append(dpos)
+                    # pos = g.new_vp('vector<float>')
+                    # pos.set_2d_array(dpos)
+                    # gt.graph_draw(g, pos, output="./data/visualization/"+str(counter)+'.png')
+                    # counter = counter + 1
+                    data.append(dpos.T)
         print('Done')
         parameters = np.array(parameters)
         data = np.array(data)
