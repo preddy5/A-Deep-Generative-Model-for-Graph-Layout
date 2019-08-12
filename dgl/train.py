@@ -1,28 +1,42 @@
 import os
-
+# import torch
 from pytorch_lightning import Trainer
+from pytorch_lightning.callbacks.pt_callbacks import ModelCheckpoint
 from test_tube import Experiment
 
 from dgl.build_model import GraphLayoutVAE
 from dgl.config import args
 
 if __name__ == '__main__':
-    dims = {'can_96': 96, }
 
-    model = GraphLayoutVAE(dims[args.dataset], 2, args.dataset, args.dataset_folder)
-    exp = Experiment(save_dir=os.getcwd())
+    model = GraphLayoutVAE(args)
 
-    # train on cpu using only 10% of the data (for demo purposes)
-    trainer = Trainer(experiment=exp, max_nb_epochs=2, train_percent_check=100, gpus=[2])
+    exp = Experiment(name=args.dataset, save_dir=args.logs, version=args.version)
+    model_save_path = '{}/{}/version_{}'.format(args.logs, exp.name, exp.version)
+    checkpoint = ModelCheckpoint(
+        filepath=model_save_path,
+        # save_best_only=True,
+        verbose=True,
+        monitor='loss',
+        mode='min',
+        prefix=args.dataset
+    )
 
-    # train on 4 gpus
-    # trainer = Trainer(experiment=exp, max_nb_epochs=1, gpus=[0, 1, 2, 3])
+    if args.save_meta:
+        exp.argparse(args)
+        exp.save()
 
-    # train on 32 gpus across 4 nodes (make sure to submit appropriate SLURM job)
-    # trainer = Trainer(experiment=exp, max_nb_epochs=1, gpus=[0, 1, 2, 3, 4, 5, 6, 7], nb_gpu_nodes=4)
+    weights = [x for x in os.listdir(model_save_path) if '.ckpt' in x]
+    tags_path = exp.get_data_path(exp.name, exp.version)
+    tags_path = os.path.join(tags_path, 'meta_tags.csv')
+    print(weights)
+    if len(weights)>0:
+        print('loading: ', weights[0])
+        model = model.load_from_metrics(weights_path=os.path.join(model_save_path,weights[0]), tags_csv=tags_path, on_gpu=True)
 
-    # train (1 epoch only here for demo)
+    trainer = Trainer(experiment=exp, checkpoint_callback=checkpoint, max_nb_epochs=400, gpus=[2,])
     trainer.fit(model)
+    trainer.model.create_sample_grid(trainer.data_parallel_device_ids[0])
 
     # view tensorflow logs
     print(f'View tensorboard logs by running\ntensorboard --logdir {os.getcwd()}')

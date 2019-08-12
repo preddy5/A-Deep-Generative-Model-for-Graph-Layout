@@ -32,7 +32,7 @@ if __name__ == '__main__':
     X = distance_matrix.get_distance_matrix(g, 'spdm', verbose=False)
     print('Done.')
 
-    num_per = 3
+    num_per = 12
     C_range = [0.1, 0.3]
     p_range = [1.5, 2.5]
     mu_range = [0.0, 0.5]
