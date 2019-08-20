@@ -33,7 +33,6 @@ conda install -c conda-forge gdk-pixbuf
 install [Pytorch-Geometric](https://github.com/rusty1s/pytorch_geometric)
 
 # Citation
-::
 
     @article{dgl,
           Author = {Pradyumna Reddy},
