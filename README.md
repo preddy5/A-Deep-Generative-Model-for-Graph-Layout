@@ -31,3 +31,11 @@ conda install -c conda-forge libiconv
 conda install -c conda-forge gdk-pixbuf
 ```
 install [Pytorch-Geometric](https://github.com/rusty1s/pytorch_geometric)
+
+# Citation
+@article{dgl,
+      Author = {Pradyumna Reddy},
+      Title = {DGL Pytorch},
+      Journal = {https://github.com/preddy5/A-Deep-Generative-Model-for-Graph-Layout},
+      Year = {2019}
+}
