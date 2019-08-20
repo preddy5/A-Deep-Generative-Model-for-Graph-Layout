@@ -10,7 +10,7 @@ Check https://github.com/rflamary/POT to use Gromov-Wasserstein part of the pape
 
 # Example
 <p float="left">
-    <img src="teaser.png" height="256"/>
+    <img src="teaser.png"/>
 </p>
 
 # Dataset
