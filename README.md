@@ -1,8 +1,21 @@
-# Implementing DGL paper
+# Pytorch Implementing of A Deep Generative Model for Graph Layout
 
-Some code has been taken from tsnet paper
+https://arxiv.org/pdf/1904.12225.pdf
 
 This is not an official implementation  contact the authors for more info.
+
+Check config.py scripts to change variables in trainer.
+
+Check https://github.com/rflamary/POT to use Gromov-Wasserstein part of the paper. Disclaimer: I haven't implemented it here
+
+# Example
+<p float="left">
+    <img src="teaser.png" height="256"/>
+</p>
+
+# Dataset
+Dataset is generated using code  tsnet paper
+
 
 # Dependencies
 
@@ -17,3 +30,4 @@ conda install -c floriangeigl -c vgauthier -c msarahan -c bioconda -c ostrokach 
 conda install -c conda-forge libiconv
 conda install -c conda-forge gdk-pixbuf
 ```
+install [Pytorch-Geometric](https://github.com/rusty1s/pytorch_geometric)
